@@ -85,11 +85,13 @@ const studente10 = {
 const arrayStudenti = [studente1, studente2, studente3, studente4, studente5, studente6, studente7, studente8, studente9, studente10];
 //creare funzione che passi stringa alunni info
 function create_student_string(student){
-    const info_string = student.nome +  ' ' + student.cognome 
+    const info_string = student.nome +  ' ' + student.cognome + ' ' + student.annoDiNascita
     return info_string
 }
+
 function createStudentList(array){
     const container = document.getElementById('student_container');
+    container.innerHTML = ''
     for (let index = 0; index < array.length; index++) {
         const element = array[index];
         const par = document.createElement('p');
@@ -99,7 +101,19 @@ function createStudentList(array){
         container.appendChild(par);
     }
 }
-
 // createStudentList(arrayStudenti)
-// createStudentList(arrayStudenti.filter((student) => student.sesso === 'F'))
-createStudentList(arrayStudenti.sort((s1, s2) => s2.annoDiNascita - s1.annoDiNascita))
+// createStudentList(arrayStudenti.filter((student) => student.sesso === 'M'))
+
+function show_students(){
+    createStudentList(arrayStudenti)
+}
+
+function show_students_by_age(){
+    //creo un clone dell'array originale, e faccio sorting su di esso
+    const sorted_array = arrayStudenti.filter((e) => true)
+    createStudentList(sorted_array.sort((s1, s2) => s2.annoDiNascita - s1.annoDiNascita))
+}
+
+function show_only_females(){
+    createStudentList(arrayStudenti.filter((student) => student.sesso === 'F'))
+}
